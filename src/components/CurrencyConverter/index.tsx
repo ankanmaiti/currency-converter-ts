@@ -18,7 +18,7 @@ export default function CurrencyConverter() {
           <CardDescription>convert currency in real time</CardDescription>
         </CardHeader>
 
-        <CardContent className="grid gap-6">
+        <CardContent className="grid gap-4">
           <CurrencySelector/>
           <AmountInputs />
         </CardContent>
