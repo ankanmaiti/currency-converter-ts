@@ -20,13 +20,8 @@ class CurrencyAPI  {
     return currencies // returns list of names of the currencies
   }
 
-  async getLatestExchangeRate(baseCurrency: string = "USD", currencies: string[] = ['INR'], type: CurrencyType = 'fiat'): Promise<Record<string, CurrencyRate>> {
-    const {data} = await this.client.latest({
-      base_currency: baseCurrency.toUpperCase(),
-      currencies: currencies.reduce((x,y) => x.toUpperCase() + ',' + y.toUpperCase()),
-      type: type
-    });
-
+  async getLatestExchangeRate(type: CurrencyType = 'fiat'): Promise<Record<string, CurrencyRate>> {
+    const {data} = await this.client.latest({ type: type });
     return data
   }
 }
