@@ -1,30 +1,31 @@
-import currencyapi, { CurrencyAPI } from "@everapi/currencyapi-js";
-
-type CurrencyType = 'fiat' | 'metal' | 'crypto'
+interface Meta {
+  last_updated_at: string;
+}
 
 interface CurrencyRate {
   code: string;
   value: number;
 }
 
-class CurrencyAPI  {
-  client: CurrencyAPI;
+export interface ResponseType {
+  meta: Meta;
+  data: Record<string, CurrencyRate>;
+}
 
-  constructor() {
-    this.client = new currencyapi(import.meta.env.VITE_CURRENCY_API_KEY);
-  }
+class CurrencyAPI {
+  async getAvailableCurrencies() { }
 
-  async getAvailableCurrencies( type: CurrencyType = 'fiat'): Promise<string[]> {
-    const {data} = await this.client.currencies({ type: type });
-    const currencies = Object.keys(data)
-    return currencies // returns list of names of the currencies
-  }
+  async getLatestExchangeRate(): Promise<Record<string, CurrencyRate>> {
+    const res = await fetch(`https://api.currencyapi.com/v3/latest`, {
+      method: "GET",
+      headers: {
+        apikey: import.meta.env.VITE_CURRENCY_API_KEY,
+      },
+    });
 
-  async getLatestExchangeRate(type: CurrencyType = 'fiat'): Promise<Record<string, CurrencyRate>> {
-    const {data} = await this.client.latest({ type: type });
-    return data
+    const { data } = await res.json();
+    return data as Record<string, CurrencyRate>;
   }
 }
 
 export default new CurrencyAPI();
-

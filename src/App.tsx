@@ -1,10 +1,10 @@
-import CurrencyConverter2 from "./components/CurrencyConverter2";
+import CurrencyConverter from "@/components/CurrencyConverter";
 
 export default function App() {
   return (
     <>
       <div className="w-screen h-screen">
-        <CurrencyConverter2 className="border-none md:w-3/4 mx-auto" />
+        <CurrencyConverter className="border-none md:w-3/4 mx-auto" />
       </div>
     </>
   );

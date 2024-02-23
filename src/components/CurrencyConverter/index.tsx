@@ -1,30 +1,47 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import AmountInputs from "./AmountInputs";
-import CurrencySelector from "./CurrencySelector";
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import MultiSearch from "../elements/MultiSearch";
+import CurrencyBox from "./CurrencyBox";
 
-export default function CurrencyConverter() {
+
+interface CurrencyConverterProps {
+  className?: string;
+}
+
+export default function CurrencyConverter({
+  className,
+}: CurrencyConverterProps) {
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle>Currency Converter</CardTitle>
-          <CardDescription>convert currency in real time</CardDescription>
+      <Card className={className}>
+        <CardHeader className="items-center">
+            <CardTitle className="text-2xl">Currency Converter</CardTitle>
+            <CardDescription>convert currency in real time</CardDescription>
         </CardHeader>
 
-        <CardContent className="grid gap-4">
-          <CurrencySelector/>
-          <AmountInputs />
-        </CardContent>
+        <CardContent className="grid gap-6">
+          <section className="mb-5">
+            <MultiSearch />
+          </section>
 
-        <CardFooter>
-        </CardFooter>
+          <section className="grid gap-2">
+            <h5>Converted From</h5>
+            <CurrencyBox />
+          </section>
+
+          <section className="grid gap-2">
+            <h5>Converted To</h5>
+            <CurrencyBox />
+            <CurrencyBox />
+            <CurrencyBox />
+            <CurrencyBox />
+          </section>
+        </CardContent>
       </Card>
     </>
   );

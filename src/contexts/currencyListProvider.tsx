@@ -1,4 +1,4 @@
-import useBrowserStorage from "@/hooks/useBrowserStorage";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { ReactNode, createContext, useContext } from "react";
 
 interface currencyListProviderProps {
@@ -18,11 +18,7 @@ const currencyListContext = createContext<CurrencyListContextType>({
 });
 
 export function CurrencyListProvider({ children }: currencyListProviderProps) {
-  const [list, setList] = useBrowserStorage<string[]>(
-    "localStorage",
-    "currencyList",
-    initialValue,
-  );
+  const [list, setList] = useLocalStorage<string[]>("currencyList", initialValue);
 
   return (
     <currencyListContext.Provider value={{ list, setList }}>
@@ -31,5 +27,5 @@ export function CurrencyListProvider({ children }: currencyListProviderProps) {
   );
 }
 
-const useCurrencyList = ()=> useContext(currencyListContext);
+const useCurrencyList = () => useContext(currencyListContext);
 export default useCurrencyList;

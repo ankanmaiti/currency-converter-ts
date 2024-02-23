@@ -46,28 +46,3 @@ export default function Combobox({ options, label, className }: ComboboxProps) {
     </Popover>
   );
 }
-
-
-
-// <div className="min-w-40 flex flex-col">
-//   <Input
-//     type="text"
-//     placeholder="Search Here"
-//     value={input}
-//     onChange={handleInput}
-//   />
-//   <ul>
-//     {options.map((option) => (
-//       <li key={option}>
-//         <Button
-//           role="button"
-//           variant='ghost'
-//           onClick={() => handleSelect(option)}
-//           className="w-full"
-//         >
-//           {option}
-//         </Button>
-//       </li>
-//     ))}
-//   </ul>
-// </div>
