@@ -5,11 +5,12 @@ import { useState } from "react";
 import type { ChangeEvent, KeyboardEvent, ReactNode } from "react";
 import SelectOptions from "./SelectOptions";
 
-interface SearchBoxProps {
+interface SearchBoxProps<T> {
   children?: ReactNode;
+  options: T[]
 }
 
-export default function SearchBox({ children }: SearchBoxProps) {
+export default function SearchBox<T>({ children, options }: SearchBoxProps<T>) {
   const [value, setValue] = useState("");
   const { addTag, deleteLastTag } = useInputTags();
 
@@ -24,7 +25,7 @@ export default function SearchBox({ children }: SearchBoxProps) {
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key == "Backspace") {
+    if (e.key == "Backspace" && !value) {
       // stop delete last char
       e.preventDefault();
 
@@ -33,6 +34,8 @@ export default function SearchBox({ children }: SearchBoxProps) {
     }
 
     else if (e.key == 'Enter' ) {
+      addTag(value?.trim())
+      setValue('')
     }
   }
 
@@ -47,7 +50,7 @@ export default function SearchBox({ children }: SearchBoxProps) {
       />
       {children}
       <SelectOptions
-        options={["inr", "usd", "eur", "yen", "taka", "ind", "inn"]}
+        options={options}
         onSelect={(option) => addTag(String(option))}
         match={value}
       />

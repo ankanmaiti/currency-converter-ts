@@ -5,7 +5,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import MultiSearch from "../elements/MultiSearch";
 import CurrencyBox from "./CurrencyBox";
 
 
@@ -25,10 +24,6 @@ export default function CurrencyConverter({
         </CardHeader>
 
         <CardContent className="grid gap-6">
-          <section className="mb-5">
-            <MultiSearch />
-          </section>
-
           <section className="grid gap-2">
             <h5>Converted From</h5>
             <CurrencyBox />
