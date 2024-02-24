@@ -11,12 +11,18 @@ import {
 interface CurrencySelectorProps {
   options: string[];
   className?: string;
+  value?: string,
+  onChange: (value: string) => void;
+  defaultValue?: string,
 }
 
-export default function CurrencySelector({ options, className }: CurrencySelectorProps) {
+export default function CurrencySelector({value, onChange, options, className, defaultValue }: CurrencySelectorProps) {
   return (
     <>
-      <Select>
+      <Select
+        value={value ?? defaultValue}
+        onValueChange={onChange}
+      >
         <SelectTrigger className={className}>
           <SelectValue placeholder="Select Currency" />
         </SelectTrigger>
@@ -24,7 +30,7 @@ export default function CurrencySelector({ options, className }: CurrencySelecto
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Currencies</SelectLabel>
-            {options.map((option) => (
+            {options?.map((option) => (
               <SelectItem key={option} value={option}>
                 {option}
               </SelectItem>

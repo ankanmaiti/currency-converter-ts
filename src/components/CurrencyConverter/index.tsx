@@ -1,11 +1,12 @@
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import CurrencyBox from "./CurrencyBox";
+import ConvertedFrom from "./ConvertedFrom";
+import ConvertedTo from "./ConvertedTo";
 
 
 interface CurrencyConverterProps {
@@ -25,19 +26,15 @@ export default function CurrencyConverter({
 
         <CardContent className="grid gap-6">
           <section className="grid gap-2">
-            <h5>Converted From</h5>
-            <CurrencyBox />
+            <ConvertedFrom />
           </section>
 
           <section className="grid gap-2">
-            <h5>Converted To</h5>
-            <CurrencyBox />
-            <CurrencyBox />
-            <CurrencyBox />
-            <CurrencyBox />
+            <ConvertedTo />
           </section>
         </CardContent>
       </Card>
     </>
   );
 }
+
