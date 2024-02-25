@@ -1,5 +1,5 @@
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext } from "react";
 
 interface currencyListProviderProps {
   children: ReactNode;
@@ -20,7 +20,7 @@ const currencyListContext = createContext<CurrencyListContextType>({
 });
 
 export function CurrencyListProvider({ children }: currencyListProviderProps) {
-  const [list, setList] = useLocalStorage<string[]>("currencyList", initialValue);
+  const [list, setList] = useLocalStorage<string[]>("currencies", initialValue);
 
   function reArrangeList(index: number, value: string) {
     const t = list.at(index)

@@ -1,21 +1,26 @@
-import useLocalStorage from "@/hooks/useLocalStorage";
-import { ReactNode, createContext, useContext } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext } from "react";
+import useCurrencyList from "./currencyListProvider";
 
-
-type Tag = string
+type Tag = string;
 
 interface InputTagsContextState {
   tags: Tag[];
+  setTags: Dispatch<SetStateAction<Tag[]>>,
   addTag: (tag: Tag) => void;
   deleteLastTag: () => Tag | undefined;
-  deleteTag: (tag:Tag) => void
+  deleteTag: (tag: Tag) => void;
 }
 
 const InputTagsContext = createContext<InputTagsContextState>({
   tags: [""],
-  addTag: (tag: Tag) => { tag },
+  setTags: () => {},
+  addTag: (tag: Tag) => {
+    tag;
+  },
   deleteLastTag: () => undefined,
-  deleteTag: (tag: Tag) => { tag },
+  deleteTag: (tag: Tag) => {
+    tag;
+  },
 });
 
 interface InputTagsProviderProps {
@@ -23,34 +28,36 @@ interface InputTagsProviderProps {
 }
 
 export function InputTagsProvider({ children }: InputTagsProviderProps) {
-  const [tags, setTags] = useLocalStorage<Tag[]>("searchTags", []);
+  const { list:tags, setList:setTags } = useCurrencyList();
 
   function addTag(tag: Tag) {
-    if (!tag) return
-    
+    if (!tag) return;
+
     // store unique tags
-    const uniqueTags = new Set([...tags, tag])
-    setTags([...uniqueTags])
+    const uniqueTags = new Set([...tags, tag]);
+    setTags([...uniqueTags]);
   }
 
   function deleteLastTag() {
-    const lastTag = tags.at(-1)
-    setTags(prevTags => prevTags.slice(0, -1))
-    return lastTag
+    const lastTag = tags.at(-1);
+    setTags((prevTags) => prevTags.slice(0, -1));
+    return lastTag;
   }
 
   function deleteTag(tag: Tag) {
-    if (!tag) return
+    if (!tag) return;
 
-    setTags(prevTags => prevTags.filter(prevTag => prevTag != tag))
+    setTags((prevTags) => prevTags.filter((prevTag) => prevTag != tag));
   }
 
   return (
-    <InputTagsContext.Provider value={{ tags, addTag, deleteTag, deleteLastTag }}>
+    <InputTagsContext.Provider
+      value={{ tags, setTags, addTag, deleteTag, deleteLastTag }}
+    >
       {children}
     </InputTagsContext.Provider>
   );
 }
 
-const useInputTags = () => useContext(InputTagsContext)
-export default useInputTags
+const useInputTags = () => useContext(InputTagsContext);
+export default useInputTags;

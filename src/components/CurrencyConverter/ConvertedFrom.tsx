@@ -4,6 +4,8 @@ import CurrencyBox from "./CurrencyBox"
 export default function ConvertedFrom() {
   const { list: currencyList, reArrangeList } = useCurrencyList()
 
+  if (currencyList?.length < 1) return
+
   return (
   <>
       <h5>Converted From</h5>

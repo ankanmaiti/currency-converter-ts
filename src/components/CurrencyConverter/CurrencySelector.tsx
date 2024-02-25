@@ -11,11 +11,16 @@ import {
 interface CurrencySelectorProps {
   options: string[];
   className?: string;
-  value?: string,
+  value?: string;
   onChange: (value: string) => void;
 }
 
-export default function CurrencySelector({value, onChange, options, className}: CurrencySelectorProps) {
+export default function CurrencySelector({
+  value,
+  onChange,
+  options,
+  className,
+}: CurrencySelectorProps) {
   return (
     <>
       <Select
