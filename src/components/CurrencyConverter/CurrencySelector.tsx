@@ -13,14 +13,13 @@ interface CurrencySelectorProps {
   className?: string;
   value?: string,
   onChange: (value: string) => void;
-  defaultValue?: string,
 }
 
-export default function CurrencySelector({value, onChange, options, className, defaultValue }: CurrencySelectorProps) {
+export default function CurrencySelector({value, onChange, options, className}: CurrencySelectorProps) {
   return (
     <>
       <Select
-        value={value ?? defaultValue}
+        value={value}
         onValueChange={onChange}
       >
         <SelectTrigger className={className}>
