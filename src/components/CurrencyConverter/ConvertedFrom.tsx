@@ -1,19 +1,21 @@
-import useCurrencyList from "@/contexts/currencyListProvider"
-import CurrencyBox from "./CurrencyBox"
+import useCurrencyStore from "@/store/currencyStore";
+import CurrencyBox from "./CurrencyBox";
 
 export default function ConvertedFrom() {
-  const { list: currencyList, reArrangeList } = useCurrencyList()
+  const currencies = useCurrencyStore((state) => state.currencies);
+  const swapCurrencies = useCurrencyStore((state) => state.swap);
 
-  if (currencyList?.length < 1) return
+  if (currencies?.length < 1) return;
+  const fromCurrency = currencies[0];
 
   return (
-  <>
+    <>
       <h5>Converted From</h5>
       <CurrencyBox
-        options={currencyList}
-        value={currencyList?.at(0) || ''}
-        onChange={(newSelection)=>{reArrangeList(0, newSelection)}}
+        options={currencies}
+        value={fromCurrency}
+        onChange={(newValue: string) => swapCurrencies(fromCurrency, newValue)}
       />
-  </>
-  )
+    </>
+  );
 }

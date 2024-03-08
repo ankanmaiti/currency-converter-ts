@@ -1,20 +1,22 @@
-import useCurrencyList from "@/contexts/currencyListProvider"
+import useCurrencyStore from "@/store/currencyStore"
 import CurrencyBox from "./CurrencyBox"
 
 
 export default function ConvertedTo() {
-  const { list: currencyList, reArrangeList } = useCurrencyList()
+  const currencies = useCurrencyStore(state => state.currencies)
+  const swapCurrencies = useCurrencyStore((state) => state.swap);
 
-  if (currencyList?.length < 2) return
+  if (currencies?.length < 2) return
 
   return (
   <>
       <h5>Converted To</h5>
-      { currencyList?.slice(1).map(( currency, index ) => <CurrencyBox
+      { currencies?.slice(1).map(( currency) => <CurrencyBox
         key={currency}
-        options={currencyList}
+        options={currencies}
         value={currency}
-        onChange={(newSelection) => {reArrangeList(index+1, newSelection)}}
+        onChange={(newValue: string) => swapCurrencies(currency, newValue)}
+        disbled
       />)}
   </>
   )

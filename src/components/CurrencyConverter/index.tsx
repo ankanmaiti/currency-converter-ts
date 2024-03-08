@@ -13,12 +13,10 @@ interface CurrencyConverterProps {
   className?: string;
 }
 
-export default function CurrencyConverter({
-  className,
-}: CurrencyConverterProps) {
+export default function CurrencyConverter({ className }: CurrencyConverterProps) {
   return (
     <>
-      <Card className={'relative ' + className}>
+      <Card className={className}>
         <CardHeader className="items-center">
           <CardTitle className="text-2xl">Currency Converter</CardTitle>
           <CardDescription>convert currency in real time</CardDescription>
@@ -41,5 +39,3 @@ export default function CurrencyConverter({
     </>
   );
 }
-
-
